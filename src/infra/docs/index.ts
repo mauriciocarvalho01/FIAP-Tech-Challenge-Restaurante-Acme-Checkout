@@ -80,6 +80,4 @@ export function Response<T>(
 }
 
 export * from './healthCheckDoc';
-export * from './orderDoc';
-export * from './clientDoc';
-export * from './productDoc';
+export * from './paymentDoc';

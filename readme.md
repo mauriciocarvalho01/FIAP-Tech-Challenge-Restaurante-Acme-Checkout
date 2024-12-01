@@ -94,6 +94,7 @@ Inicie o Minikube com o seguinte comando:
 ```sh
 minikube start
 minikube tunnel
+minikube dashboard
 ```
 
 ### 4. Crie e Aplique os Arquivos Kubernetes

@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   annotations:
     reloader.stakater.com/auto: "true"
-    secret.reloader.stakater.com/reload: fiap/restaurante-acme
+    secret.reloader.stakater.com/reload: fiap/restaurante-acme-pagamentos
   namespace: fiap
-  name: restaurante-acme
+  name: restaurante-acme-pagamentos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: restaurante-acme
+      app: restaurante-acme-pagamentos
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -19,12 +19,12 @@ spec:
   template:
     metadata:
       labels:
-        app: restaurante-acme
+        app: restaurante-acme-pagamentos
     spec:
       serviceAccountName: metrics-sa
       containers:
-        - name: restaurante-acme
-          image: developer0101/tech-challenge:latest
+        - name: restaurante-acme-pagamentos
+          image: developer0101/restaurante-acme-pagamentos:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 4080
@@ -41,6 +41,8 @@ spec:
               memory: "512Mi"
               cpu: "512m"
           envFrom:
+            - secretRef:
+                name: restaurante-acme-secrets
             - configMapRef:
                 name: restaurante-acme-vars
           readinessProbe:

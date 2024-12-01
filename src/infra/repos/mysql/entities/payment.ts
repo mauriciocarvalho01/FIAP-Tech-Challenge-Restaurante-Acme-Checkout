@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { OrderEntity } from '@/infra/repos/mysql/entities';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+// import { OrderEntity } from '@/infra/repos/mysql/entities';
 import { IsEnum, IsNumber, IsPositive, Min } from 'class-validator';
+import { v4 as uuidv4 } from 'uuid';
 
 export enum PaymentStatus {
   PENDENTE = 'Pendente',
@@ -14,7 +15,7 @@ export class PaymentEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id?: number;
 
-  @Column({ name: 'pedido_id' })
+  @Column({ name: 'id_pagamento', unique: true, default: uuidv4() })
   paymentId!: string;
 
   @Column({
@@ -27,7 +28,7 @@ export class PaymentEntity {
   @IsNumber({}, { message: 'O valor total deve ser um número' })
   @IsPositive({ message: 'O valor total deve ser positivo' })
   @Min(1.0, { message: 'O valor total deve ser pelo menos 1,00' })
-  totalPrice!: number;
+  totalValue!: number;
 
   @Column({ name: 'forma_pagamento', default: 'Pix' })
   paymentMethod!: string;
@@ -48,8 +49,16 @@ export class PaymentEntity {
   @Column({ name: 'validade', default: '' })
   expirationDate?: string;
 
-  @ManyToOne(() => OrderEntity, (order) => order.payments, {
-    onDelete: 'CASCADE',
-  })
-  order!: OrderEntity;
+  @Column({ name: 'id_cliente', default: '' })
+  clientId?: string;
+
+  @Column({ name: 'id_pedido' })
+  orderId!: string;
+
+
+  @CreateDateColumn({ name: 'data_cadastro', type: 'timestamp' })
+  createdAt!: Date;
+
+  @UpdateDateColumn({ name: 'data_atualizacao', type: 'timestamp' })
+  updatedAt!: Date;
 }

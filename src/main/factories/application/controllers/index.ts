@@ -1,3 +1,2 @@
-export * from './register';
-export * from './order';
-export * from './product';
+export * from './payment';
+

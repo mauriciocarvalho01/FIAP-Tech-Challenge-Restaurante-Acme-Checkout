@@ -1,2 +1,2 @@
-export * from './register-repository';
-export * from './order-repository';
+export * from './payment-repository';
+export * from './repository';
