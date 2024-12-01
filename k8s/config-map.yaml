@@ -4,7 +4,7 @@ metadata:
   name: restaurante-acme-vars
   namespace: fiap
   labels:
-    app: restaurante-acme
+    app: estaurante-acme-pagamentos
 data:
   PORT: "4080"
   CHECK_IP_AUTHORIZATION: "false"
