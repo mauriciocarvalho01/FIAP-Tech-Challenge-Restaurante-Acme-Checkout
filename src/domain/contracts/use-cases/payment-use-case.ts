@@ -1,28 +1,31 @@
-import { Order } from '../repos';
+import { Payment } from '../repos';
 
 export interface PaymentService {
   processPaymentWebhook: (
     webhook: PaymentService.PaymentWebhookInput
   ) => PaymentService.GenericType;
   validatePaymentMethodRule: (paymentMethod: string) => boolean;
+  validatePaymentStatusRule: (order: Payment.Order) => boolean
   savePayment: (
-    paymentData: Order.InsertPaymentInput
-  ) => Promise<Order.InsertPaymentOutput>;
+    paymentData: Payment.InsertPaymentInput
+  ) => Promise<Payment.InsertPaymentOutput>
 }
 
 export namespace PaymentService {
   export type GenericType<T = any> = T;
 
   export type PaymentWebhookInput = {
-    id: number;
-    live_mode: boolean;
+    /**
+     * Weebhook recebido do gateway de pagamento
+     */
+    id: string;
     type: string;
-    date_created: string;
-    user_id: number;
-    api_version: string;
-    action: string;
+    created_at: string;
     data: {
       id: string;
+      code: string;
+      amount: number;
+      currency: string;
     };
   };
 }

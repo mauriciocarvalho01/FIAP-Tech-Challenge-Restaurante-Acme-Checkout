@@ -3,33 +3,13 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { CreateCheckoutDoc } from './../../infra/docs/paymentDoc';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GetCheckoutDoc } from './../../infra/docs/paymentDoc';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { UpdatePaymentStatusDoc } from './../../infra/docs/paymentDoc';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HealthCheckDoc } from './../../infra/docs/healthCheckDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { CreateOrderDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FindOrderDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { UpdateOrderDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { DeleteOrderDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { UpdateOrderStatusDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FindAllOrdersDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { UpdatePaymentStatusDoc } from './../../infra/docs/orderDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { CreateClientDoc } from './../../infra/docs/clientDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FindClientDoc } from './../../infra/docs/clientDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FindProductDoc } from './../../infra/docs/productDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FindProductsCategoriesDoc } from './../../infra/docs/productDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { CreateCheckoutDoc } from './../../infra/docs/checkoutDoc';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { GetCheckoutDoc } from './../../infra/docs/checkoutDoc';
 import { expressAuthentication } from './../middlewares/express-authentication';
 // @ts-ignore - no great way to install types from subpackage
 const promiseAny = require('promise.any');
@@ -39,184 +19,44 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "OrderHttp.CreateOrderOutput": {
+    "PaymentHttp.CreateCheckoutOutput": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true},"paymentId":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateIngredientProductInput": {
+    "Payment.Order": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"count":{"dataType":"double","required":true},"ingredientId":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"totalValue":{"dataType":"double","required":true},"clientId":{"dataType":"string"},"status":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateOrderProductInput": {
+    "PaymentHttp.CreateCheckoutInput": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"ingredientProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"CreateIngredientProductInput"}},"count":{"dataType":"double","required":true},"productId":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"paymentMethod":{"dataType":"string","required":true},"order":{"ref":"Payment.Order","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.CreateOrderInput": {
+    "Payment.FindPaymentOutput": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"orderProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"CreateOrderProductInput"},"required":true},"clientId":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"orderId":{"dataType":"string","required":true},"clientId":{"dataType":"string"},"expirationDate":{"dataType":"datetime","required":true},"pixCode":{"dataType":"string","required":true},"pixUrl":{"dataType":"string","required":true},"status":{"dataType":"string","required":true},"paymentMethod":{"dataType":"string","required":true},"totalValue":{"dataType":"double","required":true},"paymentId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "GenericType": {
+    "PaymentHttp.GetPaymentOutput": {
         "dataType": "refAlias",
-        "type": {"dataType":"any","validators":{}},
+        "type": {"ref":"Payment.FindPaymentOutput","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FindPaymentOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"order":{"ref":"GenericType","required":true},"expirationDate":{"dataType":"datetime","required":true},"pixCode":{"dataType":"string","required":true},"pixUrl":{"dataType":"string","required":true},"status":{"dataType":"string","required":true},"paymentMethod":{"dataType":"string","required":true},"totalPrice":{"dataType":"double","required":true},"paymentId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Register.FindClientOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"cpf":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"clientId":{"dataType":"string","required":true},"id":{"dataType":"double"}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderProductCategoryOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"categoryId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderProductIngredientOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"price":{"dataType":"double","required":true},"count":{"dataType":"double","required":true},"description":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"ingredientId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderProductOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"ingredientProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"OrderProductIngredientOutput"},"required":true},"price":{"dataType":"double","required":true},"category":{"ref":"OrderProductCategoryOutput","required":true},"count":{"dataType":"double","required":true},"description":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"productId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Order.FindOrderOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"totalPrice":{"dataType":"double"},"orderProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"OrderProductOutput"},"required":true},"client":{"ref":"Register.FindClientOutput"},"createdAt":{"dataType":"string","required":true},"payments":{"dataType":"array","array":{"dataType":"refAlias","ref":"FindPaymentOutput"},"required":true},"status":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.GetOrderOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Order.FindOrderOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.UpdateOrderOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UpdateOrderProductInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"ingredientProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"CreateIngredientProductInput"}},"count":{"dataType":"double","required":true},"productId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.UpdateOrderInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"orderProducts":{"dataType":"array","array":{"dataType":"refAlias","ref":"UpdateOrderProductInput"},"required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Order.DeleteOrderOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"affected":{"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"enum","enums":[null]},{"dataType":"undefined"}],"required":true},"orderId":{"dataType":"string","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.DeleteOrderOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Order.DeleteOrderOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.UpdateOrderStatusInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.UpdatePaymentStatusOutput": {
+    "PaymentHttp.UpdatePaymentStatusOutput": {
         "dataType": "refAlias",
         "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"paymentId":{"dataType":"string","required":true},"status":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PaymentService.PaymentWebhookInput": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"data":{"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"string","required":true}},"required":true},"action":{"dataType":"string","required":true},"api_version":{"dataType":"string","required":true},"user_id":{"dataType":"double","required":true},"date_created":{"dataType":"string","required":true},"type":{"dataType":"string","required":true},"live_mode":{"dataType":"boolean","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"data":{"dataType":"nestedObjectLiteral","nestedProperties":{"currency":{"dataType":"string","required":true},"amount":{"dataType":"double","required":true},"code":{"dataType":"string","required":true},"id":{"dataType":"string","required":true}},"required":true},"created_at":{"dataType":"string","required":true},"type":{"dataType":"string","required":true},"id":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.UpdatePaymentStatusInput": {
+    "PaymentHttp.UpdatePaymentStatusInput": {
         "dataType": "refAlias",
         "type": {"ref":"PaymentService.PaymentWebhookInput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Register.InsertClientOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"clientId":{"dataType":"string","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ClientHttp.CreateClientOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Register.InsertClientOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ClientHttp.CreateClientInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"cpf":{"dataType":"string","required":true},"email":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ClientHttp.GetClientOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Register.FindClientOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ProductOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"updatedAt":{"dataType":"string","required":true},"createdAt":{"dataType":"string","required":true},"price":{"dataType":"double","required":true},"description":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"productId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Order.FindProductOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"ref":"ProductOutput","required":true},"price":{"dataType":"double","required":true},"description":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"productId":{"dataType":"string","required":true},"id":{"dataType":"string","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.GetProductOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Order.FindProductOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IngredientsOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"updatedAt":{"dataType":"string","required":true},"createdAt":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"ingredientId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FindCategoryOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"ingredients":{"dataType":"array","array":{"dataType":"refAlias","ref":"IngredientsOutput"},"required":true},"products":{"dataType":"array","array":{"dataType":"refAlias","ref":"ProductOutput"},"required":true},"name":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Order.FindCategoriesOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"array","array":{"dataType":"refAlias","ref":"FindCategoryOutput"}},{"dataType":"undefined"}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.GetCategoriesOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Order.FindCategoriesOutput","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.CreateCheckoutOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true},"paymentId":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.CreateCheckoutInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"paymentMethod":{"dataType":"string","required":true},"orderId":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Order.FindPaymentOutput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"undefined"},{"dataType":"nestedObjectLiteral","nestedProperties":{"order":{"ref":"GenericType","required":true},"expirationDate":{"dataType":"datetime","required":true},"pixCode":{"dataType":"string","required":true},"pixUrl":{"dataType":"string","required":true},"status":{"dataType":"string","required":true},"paymentMethod":{"dataType":"string","required":true},"totalPrice":{"dataType":"double","required":true},"paymentId":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrderHttp.GetPaymentOutput": {
-        "dataType": "refAlias",
-        "type": {"ref":"Order.FindPaymentOutput","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -229,12 +69,14 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/healthcheck',
-            ...(fetchMiddlewares<RequestHandler>(HealthCheckDoc)),
-            ...(fetchMiddlewares<RequestHandler>(HealthCheckDoc.prototype.getHealthCheck)),
+        app.post('/checkout',
+            authenticateMiddleware([{"apiKey":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(CreateCheckoutDoc)),
+            ...(fetchMiddlewares<RequestHandler>(CreateCheckoutDoc.prototype.CreatePayment)),
 
-            function HealthCheckDoc_getHealthCheck(request: any, response: any, next: any) {
+            function CreateCheckoutDoc_CreatePayment(request: any, response: any, next: any) {
             const args = {
+                    _body: {"in":"body","name":"_body","required":true,"ref":"PaymentHttp.CreateCheckoutInput"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -243,24 +85,24 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new HealthCheckDoc();
+                const controller = new CreateCheckoutDoc();
 
 
-              const promise = controller.getHealthCheck.apply(controller, validatedArgs as any);
+              const promise = controller.CreatePayment.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/order',
+        app.get('/checkout',
             authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(CreateOrderDoc)),
-            ...(fetchMiddlewares<RequestHandler>(CreateOrderDoc.prototype.CreateOrder)),
+            ...(fetchMiddlewares<RequestHandler>(GetCheckoutDoc)),
+            ...(fetchMiddlewares<RequestHandler>(GetCheckoutDoc.prototype.FindPayment)),
 
-            function CreateOrderDoc_CreateOrder(request: any, response: any, next: any) {
+            function GetCheckoutDoc_FindPayment(request: any, response: any, next: any) {
             const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"OrderHttp.CreateOrderInput"},
+                    _paymentId: {"in":"query","name":"paymentId","required":true,"dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -269,139 +111,10 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new CreateOrderDoc();
+                const controller = new GetCheckoutDoc();
 
 
-              const promise = controller.CreateOrder.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/order',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(FindOrderDoc)),
-            ...(fetchMiddlewares<RequestHandler>(FindOrderDoc.prototype.FindOrder)),
-
-            function FindOrderDoc_FindOrder(request: any, response: any, next: any) {
-            const args = {
-                    _orderId: {"in":"query","name":"orderId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new FindOrderDoc();
-
-
-              const promise = controller.FindOrder.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/order',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(UpdateOrderDoc)),
-            ...(fetchMiddlewares<RequestHandler>(UpdateOrderDoc.prototype.UpdateOrder)),
-
-            function UpdateOrderDoc_UpdateOrder(request: any, response: any, next: any) {
-            const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"OrderHttp.UpdateOrderInput"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new UpdateOrderDoc();
-
-
-              const promise = controller.UpdateOrder.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/order',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(DeleteOrderDoc)),
-            ...(fetchMiddlewares<RequestHandler>(DeleteOrderDoc.prototype.DeleteOrder)),
-
-            function DeleteOrderDoc_DeleteOrder(request: any, response: any, next: any) {
-            const args = {
-                    _orderId: {"in":"query","name":"orderId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new DeleteOrderDoc();
-
-
-              const promise = controller.DeleteOrder.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/order-status',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(UpdateOrderStatusDoc)),
-            ...(fetchMiddlewares<RequestHandler>(UpdateOrderStatusDoc.prototype.UpdateOrderStatus)),
-
-            function UpdateOrderStatusDoc_UpdateOrderStatus(request: any, response: any, next: any) {
-            const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"OrderHttp.UpdateOrderStatusInput"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new UpdateOrderStatusDoc();
-
-
-              const promise = controller.UpdateOrderStatus.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/orders',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(FindAllOrdersDoc)),
-            ...(fetchMiddlewares<RequestHandler>(FindAllOrdersDoc.prototype.FindAllOrders)),
-
-            function FindAllOrdersDoc_FindAllOrders(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new FindAllOrdersDoc();
-
-
-              const promise = controller.FindAllOrders.apply(controller, validatedArgs as any);
+              const promise = controller.FindPayment.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
@@ -414,7 +127,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function UpdatePaymentStatusDoc_UpdatePaymentStatus(request: any, response: any, next: any) {
             const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"OrderHttp.UpdatePaymentStatusInput"},
+                    _body: {"in":"body","name":"_body","required":true,"ref":"PaymentHttp.UpdatePaymentStatusInput"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -433,90 +146,11 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/client',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(CreateClientDoc)),
-            ...(fetchMiddlewares<RequestHandler>(CreateClientDoc.prototype.CreateClient)),
+        app.get('/healthcheck',
+            ...(fetchMiddlewares<RequestHandler>(HealthCheckDoc)),
+            ...(fetchMiddlewares<RequestHandler>(HealthCheckDoc.prototype.getHealthCheck)),
 
-            function CreateClientDoc_CreateClient(request: any, response: any, next: any) {
-            const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"ClientHttp.CreateClientInput"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new CreateClientDoc();
-
-
-              const promise = controller.CreateClient.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/client',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(FindClientDoc)),
-            ...(fetchMiddlewares<RequestHandler>(FindClientDoc.prototype.FindClient)),
-
-            function FindClientDoc_FindClient(request: any, response: any, next: any) {
-            const args = {
-                    _cpf: {"in":"query","name":"cpf","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new FindClientDoc();
-
-
-              const promise = controller.FindClient.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/product',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(FindProductDoc)),
-            ...(fetchMiddlewares<RequestHandler>(FindProductDoc.prototype.FindProduct)),
-
-            function FindProductDoc_FindProduct(request: any, response: any, next: any) {
-            const args = {
-                    _productId: {"in":"query","name":"productId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new FindProductDoc();
-
-
-              const promise = controller.FindProduct.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/categories',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(FindProductsCategoriesDoc)),
-            ...(fetchMiddlewares<RequestHandler>(FindProductsCategoriesDoc.prototype.FindProductsCategories)),
-
-            function FindProductsCategoriesDoc_FindProductsCategories(request: any, response: any, next: any) {
+            function HealthCheckDoc_getHealthCheck(request: any, response: any, next: any) {
             const args = {
             };
 
@@ -526,62 +160,10 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new FindProductsCategoriesDoc();
+                const controller = new HealthCheckDoc();
 
 
-              const promise = controller.FindProductsCategories.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/checkout',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(CreateCheckoutDoc)),
-            ...(fetchMiddlewares<RequestHandler>(CreateCheckoutDoc.prototype.CreateOrder)),
-
-            function CreateCheckoutDoc_CreateOrder(request: any, response: any, next: any) {
-            const args = {
-                    _body: {"in":"body","name":"_body","required":true,"ref":"OrderHttp.CreateCheckoutInput"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new CreateCheckoutDoc();
-
-
-              const promise = controller.CreateOrder.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/checkout',
-            authenticateMiddleware([{"apiKey":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(GetCheckoutDoc)),
-            ...(fetchMiddlewares<RequestHandler>(GetCheckoutDoc.prototype.FindOrder)),
-
-            function GetCheckoutDoc_FindOrder(request: any, response: any, next: any) {
-            const args = {
-                    _paymentId: {"in":"query","name":"paymentId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new GetCheckoutDoc();
-
-
-              const promise = controller.FindOrder.apply(controller, validatedArgs as any);
+              const promise = controller.getHealthCheck.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

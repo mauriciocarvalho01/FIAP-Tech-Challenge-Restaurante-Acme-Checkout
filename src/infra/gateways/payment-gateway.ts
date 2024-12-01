@@ -1,8 +1,8 @@
-import { Order } from '@/domain/contracts/repos';
+import { Payment } from '@/domain/contracts/repos';
 
 export interface PaymentGateway {
   pixGenerate(
-    order: PaymentGateway.Order
+    paymentData: PaymentGateway.PaymentData
   ): Promise<PaymentGateway.PixGenerateResponse>;
 }
 
@@ -11,8 +11,10 @@ export namespace PaymentGateway {
     paymentMethod: string;
     pixUrl: string;
     pixCode: string;
+    totalValue: number;
+    clientId?: string;
     expirationDate: Date;
-  };
+  } | undefined;
 
-  export type Order = Order.FindOrderOutput;
+  export type PaymentData<T=any> = T;
 }
