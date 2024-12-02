@@ -1,6 +1,6 @@
 # FIAP - Software Architecture Pós Tech - 7SOAT
 
-### Fase 2: Tech Challenge
+### Fase 4: Tech Challenge
 
 #### Restaurante ACME
 
