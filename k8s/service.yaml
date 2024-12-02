@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: fiap
-  name: rrestaurante-acme-pagamentos-svc
+  name: restaurante-acme-pagamentos-svc
 spec:
   type: LoadBalancer
   selector:
-    app: rrestaurante-acme-pagamentos
+    app: restaurante-acme-pagamentos
   ports:
     - port: 80
       protocol: TCP
       targetPort: 4080
-      name: rrestaurante-acme-pagamentos-load-balancer
+      name: restaurante-acme-pagamentos-load-balancer
