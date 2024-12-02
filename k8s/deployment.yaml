@@ -44,7 +44,7 @@ spec:
             - secretRef:
                 name: restaurante-acme-secrets
             - configMapRef:
-                name: restaurante-acme-vars
+                name: restaurante-acme-pagamentos-vars
           readinessProbe:
               httpGet:
                   path: /v1/api/healthcheck
