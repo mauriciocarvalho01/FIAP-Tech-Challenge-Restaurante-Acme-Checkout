@@ -43,7 +43,7 @@ export class GetCheckoutDoc extends TsoaController {
   @Tags('Checkout')
   @Security('apiKey')
   @Response<PaymentHttp.GetPaymentOutput>(200, 'Ok')
-  FindPayment(@Query('paymentId') _paymentId: string): void {
+  FindPayment(@Query('paymentId') _paymentId?: string, @Query('orderId') orderId?: string): void {
     /* Documentation - Rout to get a checkout */
   }
 }

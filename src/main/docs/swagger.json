@@ -271,7 +271,15 @@
 					{
 						"in": "query",
 						"name": "paymentId",
-						"required": true,
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "orderId",
+						"required": false,
 						"schema": {
 							"type": "string"
 						}
